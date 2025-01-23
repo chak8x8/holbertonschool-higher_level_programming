@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 def no_c(my_string):
-    
+
     # Create a translation table to remove 'c' and 'C'
     translation_table = {ord('c'): None, ord('C'): None}
 
