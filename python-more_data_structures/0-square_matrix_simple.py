@@ -4,8 +4,8 @@ def square_matrix_simple(matrix=[]):
 
     for row in matrix:
         new_row = []
-        for j in range(len(row)):
-           new_row.append(j ** 2)
+        for i in row:
+           new_row.append(i ** 2)
         new_matrix.append(new_row)
 
     return new_matrix
