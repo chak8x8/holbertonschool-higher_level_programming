@@ -1,0 +1,67 @@
+===================================
+How to Use 5-text_indentation.py
+===================================
+
+This module defines a text formatting function ``text_indentation(text)``.
+
+Usage
+=====
+
+``text_indentation(...)`` prints text with 2 new lines after `.`, `?`, and `:`.
+
+::
+
+    >>> text_indentation = __import__('5-text_indentation').text_indentation
+    >>> text = "Hello. How are you? I am fine: thank you."
+    >>> text_indentation(text)
+    Hello.
+
+    How are you?
+
+    I am fine:
+
+    thank you.
+
+Extra spaces after `.` `?` `:` should be removed.
+
+::
+
+    >>> text = "This is a sentence.  Another one?    Here is more:  Yes!"
+    >>> text_indentation(text)
+    This is a sentence.
+
+    Another one?
+
+    Here is more:
+
+    Yes!
+
+Invalid Inputs
+=============
+
+Only strings are allowed. Otherwise, a `TypeError` is raised.
+
+::
+
+    >>> text_indentation(123)
+    Traceback (most recent call last):
+    TypeError: text must be a string
+
+::
+
+    >>> text_indentation(None)
+    Traceback (most recent call last):
+    TypeError: text must be a string
+
+``text_indentation("")`` should print nothing.
+
+::
+
+    >>> text_indentation("")
+    
+``text_indentation("Only words")`` should print the text without extra formatting.
+
+::
+
+    >>> text_indentation("Only words")
+    Only words
