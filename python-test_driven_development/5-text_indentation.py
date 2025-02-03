@@ -33,7 +33,7 @@ This module defines a function that formats text with indentation.
 
         if text[i] in ".?:":  
             print("\n")  # Print **two new lines** after `. ? :`
-            print()
+            print("\n")
             i += 1  # Move to the next character
 
             while i < len(text) and text[i] == " ":
