@@ -32,6 +32,7 @@ def text_indentation(text):
         print(text[i], end="")  # Print character without extra spaces
         if text[i] in ".?:":
             print("\n")  # Print two new lines
+            print()
             i += 1  # Skip the following space if it exists
             while i < len(text) and text[i] == " ":
                 i += 1
