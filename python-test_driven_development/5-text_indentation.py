@@ -4,7 +4,7 @@ This module defines a function that formats text with indentation.
 """
 
 
-def text_indentation(text):
+ def text_indentation(text):
     """
     Prints a text with 2 new lines after each occurrence of '.', '?', and ':'.
 
@@ -29,12 +29,15 @@ def text_indentation(text):
 
     i = 0
     while i < len(text):
-        print(text[i], end="")  # Print character without extra spaces
-        if text[i] in ".?:":
-            print("\n")  # Print two new lines
+        print(text[i], end="")  # Print the character
+
+        if text[i] in ".?:":  
+            print("\n")  # Print **two new lines** after `. ? :`
             print()
-            i += 1  # Skip the following space if it exists
+            i += 1  # Move to the next character
+
             while i < len(text) and text[i] == " ":
-                i += 1
-            continue
+                i += 1  # **Skip extra spaces after `. ? :`**
+            continue  # Go to the next character
+
         i += 1
