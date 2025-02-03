@@ -28,16 +28,19 @@ def text_indentation(text):
         raise TypeError("text must be a string")
 
     i = 0
-    while i < len(text):
-        print(text[i], end="")  # Print the character
+    text_len = len(text)
+    while i < text_len:
+        # Print current character
+        print(text[i], end="")
 
-        if text[i] in ".?:":  
-            print("\n")  # Print **two new lines** after `. ? :`
-            print("\n")
-            i += 1  # Move to the next character
-
-            while i < len(text) and text[i] == " ":
-                i += 1  # **Skip extra spaces after `. ? :`**
-            continue  # Go to the next character
+        # If it's punctuation, add 2 newlines unless it's the last character
+        if text[i] in ".?:":
+            if i != text_len - 1:
+                print("\n")  # effectively 2 newlines total
+            i += 1
+            # Skip spaces
+            while i < text_len and text[i] == " ":
+                i += 1
+            continue
 
         i += 1
