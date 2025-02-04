@@ -33,11 +33,13 @@ def text_indentation(text):
             current_line += text[i]
             # Append the sentence (stripped) to the result.
             result.append(current_line.strip())
-            # Look ahead to see if there is any non-space character after the punctuation.
+            # Look ahead to see 
+            # if there is any non-space character after the punctuation.
             j = i + 1
             while j < len(text) and text[j] == " ":
                 j += 1
-            # If there is more text, add an empty string to produce a blank line.
+            # If there is more text, 
+            # add an empty string to produce a blank line.
             if j < len(text):
                 result.append("")
             # Reset the accumulator and update the index.
@@ -54,7 +56,8 @@ def text_indentation(text):
     if current_line:
         result.append(current_line.strip())
 
-    # Print all lines. To avoid a trailing newline, the last line is printed with end="".
+    # Print all lines. To avoid a trailing newline, 
+    # the last line is printed with end="".
     for idx, line in enumerate(result):
         if idx == len(result) - 1:
             print(line, end="")
