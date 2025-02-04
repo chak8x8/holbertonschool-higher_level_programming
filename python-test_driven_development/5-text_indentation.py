@@ -31,7 +31,8 @@ def text_indentation(text):
             print(char, end="")
             print("\n")
             new_line = True
-        # If a newline appears in the text, print it and mark that we're at a new line.
+        # If a newline appears in the text, 
+        # print it and mark that we're at a new line.
         elif char == "\n":
             print()
             new_line = True
