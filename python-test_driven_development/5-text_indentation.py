@@ -19,46 +19,42 @@ def text_indentation(text):
     if not isinstance(text, str):
         raise TypeError("text must be a string")
 
-    result = []     # Will hold the lines to print.
+    result = []  # This list will hold the lines to be printed.
     current_line = ""
     i = 0
-
     while i < len(text):
-        char = text[i]
-        # Skip leading spaces for a new line.
-        if char == " " and current_line == "":
+        # Skip any leading spaces for a new sentence.
+        if text[i] == " " and current_line == "":
             i += 1
             continue
 
-        # When a punctuation character is found...
-        if char in ".?:":
-            current_line += char
-            # Look ahead: skip any spaces after the punctuation.
+        if text[i] in ".?:":
+            # Append the punctuation to the current sentence.
+            current_line += text[i]
+            # Append the sentence (stripped) to the result.
+            result.append(current_line.strip())
+            # Look ahead to see if there is any non-space character after the punctuation.
             j = i + 1
             while j < len(text) and text[j] == " ":
                 j += 1
-            # Append the current sentence (trimmed) to the result.
-            result.append(current_line.strip())
-            # If there is more text after the punctuation,
-            # add an empty line (to produce 2 newlines).
+            # If there is more text, add an empty string to produce a blank line.
             if j < len(text):
                 result.append("")
-            # Reset current_line and update the index.
+            # Reset the accumulator and update the index.
             current_line = ""
             i += 1
             continue
 
-        # For all other characters, add them to current_line.
         else:
-            current_line += char
+            # Otherwise, accumulate the character.
+            current_line += text[i]
         i += 1
 
-    # If any text remains after the loop, add it.
+    # If anything remains in the accumulator, add it.
     if current_line:
         result.append(current_line.strip())
 
-    # Print all lines.
-    # To avoid a trailing newline, the last line is printed with end="".
+    # Print all lines. To avoid a trailing newline, the last line is printed with end="".
     for idx, line in enumerate(result):
         if idx == len(result) - 1:
             print(line, end="")
