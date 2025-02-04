@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """
-This module defines a function that prints a text with 2 new lines
-after each occurrence of '.', '?' or ':'.
-Each printed line has no leading or trailing whitespace.
+This module defines a function that prints a text with 2 new lines after
+each occurrence of '.', '?' and ':'.
+Each printed line has no space at the beginning or at the end.
 """
 
 
@@ -11,7 +11,7 @@ def text_indentation(text):
     Prints a text with 2 new lines after each '.', '?' and ':'.
 
     Args:
-        text (str): The input string to format.
+        text (str): The text to format and print.
 
     Raises:
         TypeError: If text is not a string.
@@ -19,31 +19,48 @@ def text_indentation(text):
     if not isinstance(text, str):
         raise TypeError("text must be a string")
 
+    result = []     # Will hold the lines to print.
     current_line = ""
-    for char in text:
-        # Skip any space if we are at the beginning of a new line.
+    i = 0
+
+    while i < len(text):
+        char = text[i]
+        # Skip leading spaces for a new line.
         if char == " " and current_line == "":
+            i += 1
             continue
 
+        # When a punctuation character is found...
         if char in ".?:":
-            # Add the punctuation to the current line.
             current_line += char
-            # Print the accumulated line stripped of leading/trailing spaces.
-            print(current_line.strip())
-            # Print an extra blank line.
-            print()
-            # Reset for the next line.
+            # Look ahead: skip any spaces after the punctuation.
+            j = i + 1
+            while j < len(text) and text[j] == " ":
+                j += 1
+            # Append the current sentence (trimmed) to the result.
+            result.append(current_line.strip())
+            # If there is more text after the punctuation,
+            # add an empty line (to produce 2 newlines).
+            if j < len(text):
+                result.append("")
+            # Reset current_line and update the index.
             current_line = ""
-        elif char == "\n":
-            # If a newline is encountered, print the current_line if any.
-            if current_line:
-                print(current_line.strip())
-                current_line = ""
-            else:
-                print()
+            i += 1
+            continue
+
+        # For all other characters, add them to current_line.
         else:
             current_line += char
+        i += 1
 
-    # Print any remaining text (without extra newline at the end).
+    # If any text remains after the loop, add it.
     if current_line:
-        print(current_line.strip(), end="")
+        result.append(current_line.strip())
+
+    # Print all lines.
+    # To avoid a trailing newline, the last line is printed with end="".
+    for idx, line in enumerate(result):
+        if idx == len(result) - 1:
+            print(line, end="")
+        else:
+            print(line)
