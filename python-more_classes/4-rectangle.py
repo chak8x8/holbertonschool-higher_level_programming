@@ -45,14 +45,14 @@ class Rectangle:
         """Returns a string representation of the rectangle with #"""
         if self.width == 0 or self.height == 0:
             return ""
-        
+
         rectangle = ""
         for _ in range(self.height):
             for _ in range(self.width):
                 rectangle += "#"
         rectangle += "\n"
 
-        return rectangle.strip()
-    
+        return rectangle.rstrip()
+
     def __repr__(self):
         return "Rectangle({}, {})".format(self.width, self.height)
