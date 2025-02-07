@@ -34,20 +34,20 @@ class Rectangle:
         self.__height = value
 
     def area(self):
-        return self.__width * self.__height
+        return self.width * self.height
 
     def perimeter(self):
-        if self.__width == 0 or self.__height == 0:
+        if self.width == 0 or self.height == 0:
             return 0
-        return (self.__width * 2) + (self.__height * 2)
+        return (self.width * 2) + (self.height * 2)
 
     def __str__(self):
         """Returns a string representation of the rectangle with #"""
-        if self.__width == 0 or self.__height == 0:
+        if self.width == 0 or self.height == 0:
             return ""
 
         rectangle = []
-        for _ in range(self.__height):
-            rectangle.append("#" * self.__width)
+        for _ in range(self.height):
+            rectangle.append("#" * self.width)
 
         return "\n".join(rectangle)  # Joins all rows with a newline
