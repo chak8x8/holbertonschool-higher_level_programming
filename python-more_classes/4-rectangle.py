@@ -50,7 +50,7 @@ class Rectangle:
         for _ in range(self.height):
             for _ in range(self.width):
                 rectangle += "#"
-        rectangle += "\n"
+            rectangle += "\n"
 
         return rectangle.rstrip()
 
