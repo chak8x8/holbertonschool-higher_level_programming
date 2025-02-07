@@ -53,3 +53,6 @@ class Rectangle:
         rectangle += "\n"
 
         return rectangle.strip()
+    
+    def __repr__(self):
+        return "Rectangle({}, {})".format(self.width, self.height)
