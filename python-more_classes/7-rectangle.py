@@ -55,7 +55,7 @@ class Rectangle:
         symbol = self.print_symbol
         for _ in range(self.height):
             for _ in range(self.width):
-                rectangle += str(Rectangle.print_symbol)
+                rectangle += str(symbol)
             rectangle += "\n"
 
         return rectangle.rstrip()
