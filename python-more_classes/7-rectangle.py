@@ -52,7 +52,7 @@ class Rectangle:
             return ""
 
         rectangle = ""
-        Rectangle.print_symbol = self.print_symbol
+        symbol = self.print_symbol
         for _ in range(self.height):
             for _ in range(self.width):
                 rectangle += str(Rectangle.print_symbol)
