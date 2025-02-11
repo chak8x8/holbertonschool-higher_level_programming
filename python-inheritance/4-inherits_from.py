@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""Module defining a function to check if an object is an instance of a subclass."""
+"""Module defining a function to check
+if an object is an instance of a subclass."""
 
 
 def inherits_from(obj, a_class):
@@ -11,6 +12,7 @@ def inherits_from(obj, a_class):
         a_class (type): The class to compare against.
 
     Returns:
-        bool: True if obj is an instance of a subclass of a_class, otherwise False.
+        bool: True if obj is an instance of a subclass of a_class,
+        otherwise False.
     """
-    return isinstance(obj, a_class) and type(obj) != a_class
+    return isinstance(obj, a_class) and type(obj) is not a_class
