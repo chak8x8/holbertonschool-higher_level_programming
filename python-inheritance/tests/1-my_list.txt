@@ -1,6 +1,6 @@
 ===========================
 How to Use 1-my_list.py
-===========================
+=======================
 
 This module defines a class ``MyList`` that extends Python's built-in ``list`` and
 adds a method to print the list in sorted order.
@@ -9,6 +9,9 @@ Usage
 =====
 
 ``MyList.print_sorted()`` prints the list in ascending sorted order without modifying the original list.
+
+Basic Example
+-------------
 
 ::
 
@@ -26,7 +29,8 @@ Usage
     >>> print(my_list)
     [1, 4, 2, 3, 5]
 
-Example with negative numbers:
+Using Negative Numbers
+----------------------
 
 ::
 
@@ -39,6 +43,9 @@ Example with negative numbers:
     >>> print(my_list)
     [-1, -3, 0, 2, 1]
 
+Handling Invalid Input
+----------------------
+
 Attempting to use mixed data types (should raise an error):
 
 ::
@@ -50,4 +57,9 @@ Attempting to use mixed data types (should raise an error):
         ...
     TypeError: '<' not supported between instances of 'str' and 'int'
 
-Note that ``print_sorted()`` does **not** modify the original list, it only prints the sorted version.
+Key Notes
+---------
+
+- ``print_sorted()`` **does not** modify the original list; it only prints the sorted version.
+- The class works exactly like Python’s built-in ``list``, except for the additional ``print_sorted()`` method.
+- Sorting is always in **ascending order**.
