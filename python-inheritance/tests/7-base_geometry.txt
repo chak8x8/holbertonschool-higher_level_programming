@@ -1,51 +1,33 @@
-=================================
+===============================
 How to Use 7-base_geometry.py
-=================================
+===============================
 
-This module defines a BaseGeometry class with methods for area calculation
-and integer validation.
+This module defines a base geometry class ``BaseGeometry``.
 
 Usage
 =====
 
-Creating an instance of `BaseGeometry`:
+Create an instance of ``BaseGeometry``:
 
 ::
 
     >>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
     >>> bg = BaseGeometry()
 
-Calling `integer_validator()` with valid integers:
+Validate integers using ``integer_validator(name, value)``:
 
 ::
 
     >>> bg.integer_validator("my_int", 12)
-
-::
-
     >>> bg.integer_validator("width", 89)
 
-Calling `integer_validator()` with invalid types:
+Invalid inputs should raise a ``TypeError``:
 
 ::
 
     >>> bg.integer_validator("name", "John")
     Traceback (most recent call last):
     TypeError: name must be an integer
-
-::
-
-    >>> bg.integer_validator("age", 0)
-    Traceback (most recent call last):
-    ValueError: age must be greater than 0
-
-::
-
-    >>> bg.integer_validator("distance", -4)
-    Traceback (most recent call last):
-    ValueError: distance must be greater than 0
-
-Additional `integer_validator()` tests with different data types:
 
 ::
 
@@ -77,7 +59,21 @@ Additional `integer_validator()` tests with different data types:
     Traceback (most recent call last):
     TypeError: age must be an integer
 
-Calling `area()` without implementation:
+Invalid values (≤ 0) should raise a ``ValueError``:
+
+::
+
+    >>> bg.integer_validator("age", 0)
+    Traceback (most recent call last):
+    ValueError: age must be greater than 0
+
+::
+
+    >>> bg.integer_validator("distance", -4)
+    Traceback (most recent call last):
+    ValueError: distance must be greater than 0
+
+The ``area()`` method should raise an exception:
 
 ::
 
