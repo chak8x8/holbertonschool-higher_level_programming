@@ -5,17 +5,18 @@ How to Use 7-base_geometry.py
 This module defines a BaseGeometry class with methods for area calculation
 and integer validation.
 
-Usage
-=====
+Instantiation
+=============
 
-Creating an instance of `BaseGeometry`:
+``BaseGeometry`` includes no attributes, and accordingly, is initialized 
+with no arguments.
 
 ::
 
     >>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
     >>> bg = BaseGeometry()
 
-Calling `integer_validator()` with valid integers:
+Testing `integer_validator()` with valid integer inputs:
 
 ::
 
@@ -25,7 +26,7 @@ Calling `integer_validator()` with valid integers:
 
     >>> bg.integer_validator("width", 89)
 
-Calling `integer_validator()` with invalid types:
+Testing `integer_validator()` with invalid inputs:
 
 ::
 
@@ -76,6 +77,20 @@ Additional `integer_validator()` tests with different data types:
     >>> bg.integer_validator("age", None)
     Traceback (most recent call last):
     TypeError: age must be an integer
+
+Explicitly testing `integer_validator()` function call without arguments:
+
+::
+
+    >>> bg.integer_validator()
+    Traceback (most recent call last):
+    TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'value'
+
+::
+
+    >>> bg.integer_validator("age")
+    Traceback (most recent call last):
+    TypeError: integer_validator() missing 1 required positional argument: 'value'
 
 Calling `area()` without implementation:
 
