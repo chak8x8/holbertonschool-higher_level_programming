@@ -19,10 +19,10 @@ class CountedIterator:
         """Returns itself as an iterator."""
         return self
 
-    def __next__(self, iterable):
+    def __next__(self):
         """Fetch the next item and increment the counter."""
         try:
-            item = next(iterable)
+            item = next(self.iterator)
             self.__counter += 1
             return item
         except StopIteration:
