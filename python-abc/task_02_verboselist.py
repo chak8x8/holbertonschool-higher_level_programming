@@ -50,4 +50,3 @@ class VerboseList(list):
             else:
                 popped_item = super().pop(index) # pop at 'index' and store it
             print("Popped [{}] from the list.".format(popped_item))
-
