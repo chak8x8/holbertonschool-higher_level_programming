@@ -45,8 +45,8 @@ class VerboseList(list):
         indicating which item was popped.
         """
         if index is None:
-            popped_item = super().pop()       # pop the last item and store it
+            popped_item = super().pop()
         else:
-            popped_item = super().pop(index) # pop at 'index' and store it
+            popped_item = super().pop(index)
         print("Popped [{}] from the list.".format(popped_item))
         return popped_item
