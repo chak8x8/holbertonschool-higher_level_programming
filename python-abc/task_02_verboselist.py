@@ -44,9 +44,8 @@ class VerboseList(list):
         the last item if no index is provided), then print a message
         indicating which item was popped.
         """
-        def pop(self, index=None):
-            if index is None:
-                popped_item = super().pop()       # pop the last item and store it
-            else:
-                popped_item = super().pop(index) # pop at 'index' and store it
-            print("Popped [{}] from the list.".format(popped_item))
+        if index is None:
+            popped_item = super().pop()       # pop the last item and store it
+        else:
+            popped_item = super().pop(index) # pop at 'index' and store it
+        print("Popped [{}] from the list.".format(popped_item))
