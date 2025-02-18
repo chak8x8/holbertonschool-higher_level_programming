@@ -3,10 +3,12 @@
 
 
 def write_file(filename="", text=""):
-    """Writes a string to a UTF-8 text file and returns the number of characters written.
+    """Writes a string to a UTF-8 text file
+    and returns the number of characters written.
 
     Args:
-        filename (str): The name of the file to write to. Defaults to an empty string.
+        filename (str): The name of the file to write to.
+        Defaults to an empty string.
         text (str): The text to write into the file.
         Defaults to an empty string.
 
