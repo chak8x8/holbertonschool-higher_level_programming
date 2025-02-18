@@ -10,7 +10,8 @@ def from_json_string(my_str):
         my_str (str): The JSON string to be converted into a Python object.
 
     Returns:
-        object: A Python object (list, dict, int, etc.) corresponding to the JSON string.
+        object: A Python object (list, dict, int, etc.)
+        corresponding to the JSON string.
 
     Example:
     >>> from_json_string('{"name": "Alice", "age": 25}')
@@ -21,7 +22,7 @@ def from_json_string(my_str):
 
     Note:
     - The function does not handle JSON decoding errors.
-    If `my_str` is not a valid JSON string, 
+    If `my_str` is not a valid JSON string,
       `json.loads()` will raise a `JSONDecodeError`.
     """
     return json.loads(my_str)  # Converts JSON string to Python object
