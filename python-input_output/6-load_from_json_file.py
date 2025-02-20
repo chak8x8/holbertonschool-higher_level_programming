@@ -10,7 +10,8 @@ def load_from_json_file(filename):
         filename (str): The name of the JSON file to read from.
 
     Returns:
-        any: The Python object (dict, list, etc.) deserialized from the JSON file.
+        any: The Python object (dict, list, etc.) deserialized
+        from the JSON file.
 
     Example:
     >>> my_list = load_from_json_file("my_list.json")
@@ -18,7 +19,7 @@ def load_from_json_file(filename):
 
     >>> my_dict = load_from_json_file("my_dict.json")
     >>> print(my_dict)  # Output: {'name': 'John', 'age': 30}
-    
+
     Notes:
     - The function **assumes** that `filename` exists and contains valid JSON.
     - If the file contains invalid JSON, `json.JSONDecodeError` will be raised.
