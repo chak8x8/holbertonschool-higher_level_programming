@@ -22,7 +22,8 @@ class Student:
         """
         Retrieves a dictionary representation of a Student instance.
 
-        If `attrs` is a list of strings, only the attributes in that list are included.
+        If `attrs` is a list of strings,
+        only the attributes in that list are included.
 
         Args:
             attrs (list, optional): List of attribute names to retrieve.
@@ -36,7 +37,8 @@ class Student:
 
     def reload_from_json(self, json):
         """
-        Replaces all attributes of the Student instance based on the provided dictionary.
+        Replaces all attributes of the Student instance 
+        based on the provided dictionary.
 
         Args:
             json (dict): Dictionary containing new attribute values.
