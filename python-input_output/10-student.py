@@ -37,9 +37,9 @@ class Student:
 
         if isinstance(attrs, list):
             for attr in attrs:
-                if isinstance(attr, str):  # Ensuring all attributes are strings
-                    if hasattr(self, attr):  # Checking if attribute exists
-                        json_dict[attr] = getattr(self, attr)  # Fetching attribute value
+                if isinstance(attr, str):
+                    if hasattr(self, attr):
+                        json_dict[attr] = getattr(self, attr)
             return json_dict
 
-        return self.__dict__  # Fallback if `attrs` is invalid
+        return self.__dict__
