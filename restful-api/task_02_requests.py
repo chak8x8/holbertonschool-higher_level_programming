@@ -22,14 +22,15 @@ def fetch_and_print_posts():
         print("Status Code:", response.status_code)
 
         if response.status_code == 200:
-            posts = response.json
+            posts = response.json()  # ✅ Fixed the method call
             print("\nFirst 5 Post Titles:")
-            for post in posts[:5]:
+            for post in posts[:5]:  # Print only the first 5 titles
                 print(f"- {post['title']}")
         else:
             print("Error: Unable to fetch posts.")
     except requests.RequestException as e:
         print(f"Request failed: {e}")
+
 
 def fetch_and_save_posts():
     """
@@ -47,7 +48,7 @@ def fetch_and_save_posts():
         response = requests.get(url)
 
         if response.status_code == 200:
-            posts = response.json()
+            posts = response.json()  # ✅ Fixed the method call
 
             # Define CSV file and column headers
             filename = "posts.csv"
@@ -66,3 +67,8 @@ def fetch_and_save_posts():
 
     except requests.RequestException as e:
         print(f"Request failed: {e}")
+
+
+if __name__ == "__main__":
+    fetch_and_print_posts()
+    fetch_and_save_posts()
