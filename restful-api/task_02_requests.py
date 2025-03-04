@@ -22,7 +22,7 @@ def fetch_and_print_posts():
         print("Status Code:", response.status_code)
 
         if response.status_code == 200:
-            posts = response.json()  # ✅ Fixed the method call
+            posts = response.json()  # ✅ Fixed method call
             print("\nFirst 5 Post Titles:")
             for post in posts[:5]:  # Print only the first 5 titles
                 print(f"- {post['title']}")
@@ -37,7 +37,7 @@ def fetch_and_save_posts():
     Fetches posts from JSONPlaceholder API and saves them as a CSV file.
 
     Creates:
-        - A CSV file `posts.csv` containing post IDs, titles, and bodies.
+        - A CSV file `posts.csv` containing post IDs, titles, userId, and bodies.
 
     Prints:
         - Success message if data is saved successfully.
@@ -48,17 +48,17 @@ def fetch_and_save_posts():
         response = requests.get(url)
 
         if response.status_code == 200:
-            posts = response.json()  # ✅ Fixed the method call
+            posts = response.json()  # ✅ Fixed method call
 
-            # Define CSV file and column headers
+            # ✅ Fixed: Added "userId" to fieldnames to match API response
             filename = "posts.csv"
-            fieldnames = ["id", "title", "body"]
+            fieldnames = ["userId", "id", "title", "body"]
 
             # Write data to CSV file
             with open(filename, "w", newline="", encoding="utf-8") as file:
                 writer = csv.DictWriter(file, fieldnames=fieldnames)
                 writer.writeheader()  # Write CSV headers
-                writer.writerows(posts)  # Write API data to file
+                writer.writerows(posts)  # ✅ Fixed field mismatch
 
             print(f"Data successfully saved to {filename}")
 
