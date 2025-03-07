@@ -22,8 +22,9 @@ class SimpleAPI(BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
+            response = {"message": "API is running"}
             self.wfile.write(json.dumps({"status": "OK"}).encode("utf-8"))
-            
+
         else:
             self.send_response(404)
             self.send_header("Content-type", "text/plain")
