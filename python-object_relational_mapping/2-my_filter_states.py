@@ -26,7 +26,7 @@ if __name__ == "__main__":
     cur = db.cursor()
 
     # Correct query + call execute()
-    query = "SELECT * FROM states WHERE name = '{}' " \
+    query = "SELECT * FROM states WHERE BINARY = '{}' " \
         "ORDER BY id ASC;".format(state_name)
     cur.execute(query)
 
