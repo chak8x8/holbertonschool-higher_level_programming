@@ -18,7 +18,6 @@ if __name__ == "__main__":
         pool_pre_ping=True
     )
 
-
     # Step 3: Create session to interact with the database
     session = Session(engine)
 
