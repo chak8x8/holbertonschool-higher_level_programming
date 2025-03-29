@@ -14,10 +14,10 @@ if __name__ == "__main__":
 
     # Step 2: Create engine (connection to MySQL)
     engine = create_engine(
-        'mysql+mysqldb: "\
-        "//{}:{}@localhost/{}'.format(username, password, database),
+        f'mysql+mysqldb://{username}:{password}@localhost/{database}',
         pool_pre_ping=True
     )
+
 
     # Step 3: Create session to interact with the database
     session = Session(engine)
