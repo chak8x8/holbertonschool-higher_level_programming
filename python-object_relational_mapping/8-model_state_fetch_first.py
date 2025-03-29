@@ -5,7 +5,7 @@
 import sys
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
-from model_state import Base, State  # State is the model class for the states table
+from model_state import Base, State
 
 # Step 2: Only run when the script is not imported
 if __name__ == "__main__":
@@ -20,7 +20,6 @@ if __name__ == "__main__":
             username, password, database),
         pool_pre_ping=True
     )
-
 
     # Step 5: Create a session (used to interact with the database)
     session = Session(engine)
