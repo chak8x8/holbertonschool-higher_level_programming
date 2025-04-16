@@ -19,8 +19,17 @@ def contact():
 
 @app.route("/items")
 def items():
-    raw = pathlib.Path("items.json").read_text()
-    items_list = json.loads(raw)["items"]
+    # 1. locate items.json next to this .py file
+    json_path = pathlib.Path(__file__).with_name("items.json")
+
+    try:
+        data = json.loads(json_path.read_text())      # may raise FileNotFoundError or JSONDecodeError
+        items_list = data.get("items", [])            # safe lookup; default to []
+        if not isinstance(items_list, list):          # ensure it's really a list
+            items_list = []
+    except (FileNotFoundError, json.JSONDecodeError):
+        items_list = []                               # fallback if anything goes wrong
+
     return render_template("items.html", items=items_list)
 
 if __name__ == '__main__':
