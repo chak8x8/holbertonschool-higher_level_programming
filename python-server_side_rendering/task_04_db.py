@@ -62,7 +62,10 @@ def products():
         try:
             with open(json_path, 'r') as f:
                 data = json.load(f)
-                products = data.get("products", [])
+                if isinstance(data, list):
+                    products = data
+                else:
+                    products = []
             if not products:
                 error = "Failed to load JSON data"
         except (FileNotFoundError, json.JSONDecodeError):
