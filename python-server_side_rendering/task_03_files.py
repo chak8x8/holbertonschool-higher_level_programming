@@ -49,10 +49,12 @@ def products():
     if source == "json":
         try:
             with open("products.json") as f:
-                products = json.loads(f)
+                data = json.load(f)
+                products = data.get("products", [])
         except Exception:
             products = []
-            error = "Failed to load JSON data"
+        error = "Failed to load JSON data"
+
     elif source == "csv":
         try:
             with open("products.csv") as f:
