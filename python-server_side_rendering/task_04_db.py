@@ -24,9 +24,9 @@ def items():
         data = json.loads(json_path.read_text())
         items_list = data.get("items", [])
         if not isinstance(items_list, list):
-            items_list = []
+            items_list = data.get("items", [])
     except (FileNotFoundError, json.JSONDecodeError):
-        items_list = []
+       items_list = data.get("items", [])
     return render_template("items.html", items=items_list)
 
 def load_csv_data(file_path):
@@ -65,11 +65,11 @@ def products():
                 if isinstance(data, list):
                     products = data
                 else:
-                    products = []
+                    products = data.get("products", [])
             if not products:
                 error = "Failed to load JSON data"
         except (FileNotFoundError, json.JSONDecodeError):
-            products = []
+            products = data.get("products", [])
             error = "Failed to load JSON data"
     elif source == "csv":
         products = load_csv_data(csv_path)
@@ -80,13 +80,17 @@ def products():
         if not products:
             error = "Failed to load SQL data"
     else:
-        products = []
+        products = data.get("products", [])
         error = "Wrong source"
 
     if product_id and not error:
         try:
-            product_id = int(product_id)  # Convert to int for comparison
+            product_id = int(product_id)
             filtered_products = [p for p in products if p["id"] == product_id]
+            if not filtered_products:
+                error = "Product not found"
+            else:
+                products = filtered_products
             if not filtered_products:
                 error = "Product not found"
             else:
@@ -100,7 +104,7 @@ def load_sql_data(file_path):
     """Load and parse data from SQLite database."""
     try:
         with sqlite3.connect(file_path) as conn:
-            cursor = conn.cursor
+            cursor = conn.cursor()
             cursor.execute('SELECT id, name, category, price FROM Products')
             rows = cursor.fetchall()
             products = [
@@ -115,7 +119,6 @@ def load_sql_data(file_path):
             return products
     except sqlite3.Error:
         return []
-
 
 
 if __name__ == '__main__':
