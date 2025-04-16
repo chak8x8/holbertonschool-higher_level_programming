@@ -22,11 +22,12 @@ def items():
     json_path = pathlib.Path(__file__).with_name("items.json")
     try:
         data = json.loads(json_path.read_text())
-        items_list = data.get("items", [])
-        if not isinstance(items_list, list):
-            items_list = data.get("items", [])
+        if isinstance(items_list, list):
+            items_list = data
+        else:
+            data.get("items", [])
     except (FileNotFoundError, json.JSONDecodeError):
-       items_list = data.get("items", [])
+       items_list = []
     return render_template("items.html", items=items_list)
 
 def load_csv_data(file_path):
@@ -69,24 +70,28 @@ def products():
             if not products:
                 error = "Failed to load JSON data"
         except (FileNotFoundError, json.JSONDecodeError):
-            products = data.get("products", [])
+            products = []
             error = "Failed to load JSON data"
     elif source == "csv":
-        products = load_csv_data(csv_path)
-        if not products:
+        try:
+            products = load_csv_data(csv_path)
+            if not products:
+                error = "Failed to load CSV data"
+        except (FileNotFoundError, KeyError):
+            products = []
             error = "Failed to load CSV data"
     elif source == "sql":
         products = load_sql_data(sql_path)
         if not products:
             error = "Failed to load SQL data"
     else:
-        products = data.get("products", [])
+        products = []
         error = "Wrong source"
 
     if product_id and not error:
         try:
             product_id = int(product_id)
-            filtered_products = [p for p in products if p["id"] == product_id]
+            filtered_products = []
             if not filtered_products:
                 error = "Product not found"
             else:
