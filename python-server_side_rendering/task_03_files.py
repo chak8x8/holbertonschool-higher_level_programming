@@ -1,7 +1,6 @@
-#!/usr/bin/env python3
-
-import json, pathlib, csv
 from flask import Flask, render_template, request
+from read_json import read, read_csv, read_json
+
 
 app = Flask(__name__)
 
@@ -11,64 +10,37 @@ def home():
 
 @app.route('/about')
 def about():
-    return render_template('about.html')
+      return render_template('about.html')
 
 @app.route('/contact')
 def contact():
-    return render_template('contact.html')
+      return render_template('contact.html')
 
-@app.route("/items")
+@app.route('/items')
 def items():
-    json_path = pathlib.Path(__file__).with_name("items.json")
-    try:
-        data = json.loads(json_path.read_text())
-        items_list = data.get("items", [])
-        if not isinstance(items_list, list):
-            items_list = []
-    except (FileNotFoundError, json.JSONDecodeError):
-        items_list = []
-    return render_template("items.html", items=items_list)
+      
+      file_name = "items.json"
+      items = read(file_name)
+      return render_template('items.html', items=items)
 
-def load_csv_data():
-    with open('products.csv', newline='') as csvfile:
-        reader = csv.DictReader(csvfile)
-        return list(reader)
-
-def load_json_data():
-    try:
-        with open("products.json") as f:
-            data = json.load(f)
-            return data.get("products", [])
-    except Exception:
-        return []
-
-@app.route("/products")
+@app.route('/products')
 def display_products():
-    source = request.args.get("source")
-    product_id = request.args.get("id")
-    error = None
+    source = request.args.get('source')
+    product_id = request.args.get('id')
 
-    if source == "json":
-        products = load_json_data()
-    elif source == "csv":
-        products = load_csv_data()
+    if source == 'json':
+        products = read_json()
+    elif source == 'csv':
+        products = read_csv()
     else:
-        products = []
-        error = "Wrong source"
-
-        if product_id and not error:
-            filtered_products = []
-            for p in products:
-                if str(p["id"]) == str(product_id):
-                    filtered_products.append(p)
-
-        if not filtered_products:
-            error = "Product not found"
-        else:
-            products = filtered_products
-
-
-    return render_template("product_display.html", products=products, error=error)
+        return render_template('product_display.html', error="Wrong source")
+    
+    if product_id:
+        products = [product for product in products if str(product['id']) == product_id]
+        if not products:
+            return render_template('product_display.html', error="Product not found")
+	
+    return render_template('product_display.html', products=products)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+       app.run(debug=True, port=5000)
