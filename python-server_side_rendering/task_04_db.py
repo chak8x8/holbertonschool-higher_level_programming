@@ -89,17 +89,15 @@ def products():
         error = "Wrong source"
 
     if product_id and not error:
+        filtered_products = []
         try:
-            product_id = int(product_id)
-            filtered_products = []
-            if not filtered_products:
-                error = "Product not found"
-            else:
+            for p in products:
+                if str(p["id"]) == str(product_id):
+                    filtered_products.append(p)
+            if filtered_products:
                 products = filtered_products
-            if not filtered_products:
-                error = "Product not found"
             else:
-                products = filtered_products
+                error = "Product not found"
         except ValueError:
             error = "Invalid product ID"
 
