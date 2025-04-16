@@ -20,7 +20,6 @@ def contact():
 @app.route("/items")
 def items():
     json_path = pathlib.Path(__file__).with_name("items.json")
-
     try:
         data = json.loads(json_path.read_text())
         items_list = data.get("items", [])
@@ -57,13 +56,17 @@ def display_products():
         products = []
         error = "Wrong source"
 
-    if product_id and not error:
-        filtered = [p for p in products if str(p["id"]) == str(product_id)]
-        if filtered:
-            products = filtered
-        else:
-            products = []
+        if product_id and not error:
+            filtered_products = []
+            for p in products:
+                if str(p["id"]) == str(product_id):
+                    filtered_products.append(p)
+
+        if not filtered_products:
             error = "Product not found"
+        else:
+            products = filtered_products
+
 
     return render_template("product_display.html", products=products, error=error)
 

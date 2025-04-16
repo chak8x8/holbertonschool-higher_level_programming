@@ -2,9 +2,9 @@
     "products": [
         {
             "id": 1,
-            "name": "Laptop",
-            "category": "Electronics",
-            "price": 799.99
+            "name": "Jarvis",
+            "category": "AI Assistant",
+            "price": 1999.99
         },
         {
             "id": 2,
