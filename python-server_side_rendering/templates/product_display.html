@@ -2,15 +2,41 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
     <title>Products</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            backgroundname: 'Times New Roman';
+            background-color: #f4f4f4;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+            margin: 20px;
+        }
+    </style>
 </head>
 
 <body>
-    {% include "header.html" %}
+    {% include 'header.html' %}
     <h1>Product List</h1>
 
     {% if error %}
-    <p>{{ error }}</p>
+    <p class="error">{{ error }}</p>
     {% elif products %}
     <table>
         <thead>
@@ -25,13 +51,15 @@
             <tr>
                 <td>{{ product.name }}</td>
                 <td>{{ product.category }}</td>
-                <td>{{ product.price }}</td>
+                <td>${{ product.price | float | round(2) }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    {% else %}
+    <p class="error">No products available</p>
     {% endif %}
-    {% include "footer.html" %}
+    {% include 'footer.html' %}
 </body>
 
 </html>
