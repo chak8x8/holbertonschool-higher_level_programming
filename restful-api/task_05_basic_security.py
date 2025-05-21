@@ -11,10 +11,14 @@ from flask_jwt_extended import (
     jwt_required, get_jwt_identity, get_jwt
 )
 
+# Initialize Flask app
 app = Flask(__name__)
+
+# Initialize Basic Authentication
 auth = HTTPBasicAuth()
 
-app.config["JWT_SECRET_KEY"] = "super-secret-key"
+# Configure JWT authentication
+app.config["JWT_SECRET_KEY"] = "super-secret-key"  # Change this in production!
 jwt = JWTManager(app)
 
 # In-memory user store
@@ -25,26 +29,30 @@ users = {
 
 @auth.verify_password
 def verify_password(username, password):
+    """Verify username and password for Basic Authentication."""
     user = users.get(username)
     if user and check_password_hash(user["password"], password):
         return username
     return None
 
 @auth.error_handler
-def auth_error(status):
-    # No Authorization header
+def auth_error():
+    """Handle Basic Authentication errors."""
+    # No Authorization header → Missing credentials
     if not request.headers.get("Authorization"):
         return jsonify({"error": "Missing credentials"}), 401
-    # Header sent but bad/unverified
+    # Header present but invalid → Invalid credentials
     return jsonify({"error": "Invalid credentials"}), 401
 
 @app.route("/basic-protected", methods=["GET"])
 @auth.login_required
 def basic_protected():
+    """Protected route using Basic Authentication."""
     return jsonify({"message": "Basic Auth: Access Granted"})
 
 @app.route("/login", methods=["POST"])
 def login():
+    """Login route for JWT authentication."""
     data = request.get_json()
     if not data or not isinstance(data, dict):
         return jsonify({"error": "Request must be a JSON object"}), 400
@@ -67,11 +75,13 @@ def login():
 @app.route("/jwt-protected", methods=["GET"])
 @jwt_required()
 def jwt_protected():
+    """Protected route using JWT authentication."""
     return jsonify({"message": "JWT Auth: Access Granted"})
 
 @app.route("/admin-only", methods=["GET"])
 @jwt_required()
 def admin_only():
+    """Admin-only protected route."""
     claims = get_jwt()
     if claims.get("role") != "admin":
         return jsonify({"error": "Admin access required"}), 403
